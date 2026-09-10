@@ -56,7 +56,7 @@ export const SECTOR_ETF_MAP: Record<string, string> = {
   'Real Estate': 'XLRE',
   'Communication Services': 'XLC',
 };
-export const MARKET_BENCHMARK = 'SPY';
+export const MARKET_BENCHMARK = '^TASI.SR';
 
 /** BUY signals within this many trading days of earnings get a warning badge. */
 export const EARNINGS_PROXIMITY_DAYS = 3;
