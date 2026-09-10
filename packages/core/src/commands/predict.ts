@@ -109,16 +109,13 @@ async function processTicker(
   const marketUptrend =
     spyCandles.length >= 2 ? gaussianChannel(spyCandles.map((c) => c.close)).isGreen : null;
   let sectorETF = MARKET_BENCHMARK;
-  const isSaudiTicker = ticker.endsWith('.SR');
-  if (!isSaudiTicker) {
-    try {
-      const fund = await getFundamentals(ticker);
-      if (fund?.sector && SECTOR_ETF_MAP[fund.sector]) {
-        sectorETF = SECTOR_ETF_MAP[fund.sector];
-      }
-    } catch {
-      /* fallback to SPY */
+  try {
+    const fund = await getFundamentals(ticker);
+    if (fund?.sector && SECTOR_ETF_MAP[fund.sector]) {
+      sectorETF = SECTOR_ETF_MAP[fund.sector];
     }
+  } catch {
+    /* fallback to SPY */
   }
   const sectorCandles = await fetchBenchmarkPrices(sectorETF);
 
